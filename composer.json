@@ -1,0 +1,13 @@
+{
+  "name": "emastyle/test-sitemap-importer",
+  "description": "Test Sitemap Imporer",
+  "authors": [
+    {
+      "name": "",
+      "email": ""
+    }
+  ],
+  "autoload": {
+    "files": ["src/SitemapImporter.php"]
+  }
+}
