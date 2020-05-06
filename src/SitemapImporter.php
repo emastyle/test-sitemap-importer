@@ -27,7 +27,7 @@ class SitemapImporter
     }
 
     /**
-     * @param $sitemapXml
+     * @param $sitemapXmlSource
      * @return array
      */
     protected function ImportSitemap($sitemapXmlSource)
