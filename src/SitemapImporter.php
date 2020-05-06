@@ -15,13 +15,7 @@ class SitemapImporter
      */
     public function ImportSitemapByUrl($sourceUrl) {
         $content = file_get_contents($sourceUrl);
-        $sitemapXml = simplexml_load_string($content);
-
-        if (empty($sitemapXml)) {
-            return [];
-        }
-
-        return $this->ImportSitemap($sitemapXml);
+        return $this->ImportSitemap($content);
     }
 
     /**
@@ -36,12 +30,15 @@ class SitemapImporter
      * @param $sitemapXml
      * @return array
      */
-    protected function ImportSitemap($sitemapXml)
+    protected function ImportSitemap($sitemapXmlSource)
     {
         $mapData = [];
-        foreach ($sitemapXml->sitemap as $sitemapElement) {
-            $url = parse_url((string)$sitemapElement->loc);
-            $mapData[$url['host']][] = ltrim($url['path'], '/');
+        $sitemapXml = simplexml_load_string($sitemapXmlSource);
+        if (!empty($sitemapXml)) {
+            foreach ($sitemapXml->url as $sitemapElement) {
+                $url = parse_url((string)$sitemapElement->loc);
+                $mapData[$url['host']][] = ltrim($url['path'], '/');
+            }
         }
         return $mapData;
     }
